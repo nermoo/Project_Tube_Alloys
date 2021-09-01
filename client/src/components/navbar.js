@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   
   inputRoot: {
-    color: 'inherit',
+    color: '#b2dfdb',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   title:{
     textDecoration:'none',
     color:'white'
+  },
+  nav:{
+    backgroundColor:'#009688',
   }
 }));
 
@@ -39,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
   return (
     
-      <AppBar position="static">
+      <AppBar className={classes.nav} position="static">
         <Toolbar>
           <Link to="/">
           <Typography className={classes.title} variant="h6" noWrap>

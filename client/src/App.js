@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Home from './components/home';
 import Navbar from './components/navbar';
 import Login from './components/login';
+import Signup from './components/signup';
+import Footer from './components/footer';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -43,13 +45,14 @@ function App() {
             
           </Route>
           <Route path="/login" component={Login}/>
+          <Route path='/signup' component={Signup}/>
         </Switch>
 
       
       </Grid>
       </div>
         
-
+      <Footer/>
       </Router>
       
     </div>

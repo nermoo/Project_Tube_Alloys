@@ -41,6 +41,11 @@ app.get('/names', async (req, res) => {
     }
   });
 
+  app.post('/userData',async (req,res)=>{
+    console.log(req.body.Name);
+    res.stastus(200).send(req.body.Name);
+  })
+
 app.listen(8080,()=>{
     console.log("server is active");
 })

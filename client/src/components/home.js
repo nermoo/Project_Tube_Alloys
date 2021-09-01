@@ -8,13 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import {useState,useEffect} from 'react';
 import NameList from './nameList';
-import {Grid, Hidden} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
     // flexGrow:1,
-    marginTop:20,
-    backgroundColor:'silver',
+    marginTop:40,
+    backgroundColor:'#b2dfdb',
   },
   bullet: {
     display: 'inline-block',
@@ -85,9 +85,9 @@ console.log(show);
     </Card>
         </Grid>
         <Grid item xs={1}></Grid>
-        <Hidden smUp>
+  
         <Grid item xs={1}></Grid>
-        </Hidden>
+       
         <Grid item  xs={10} sm={4}>
           <Card className={classes.root} variant="outlined">
       <CardContent>
