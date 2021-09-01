@@ -4,6 +4,7 @@ const app=express();
 const mongoose=require('mongoose');
 const axios=require('axios');
 const userNames = require('./models/names');
+const User=require('./models/users');
 
 try {
     mongoose.connect('mongodb+srv://nermo:nermo@userdata.knaz0.mongodb.net/UserData?retryWrites=true&w=majority',{ useUnifiedTopology: true });
@@ -43,7 +44,20 @@ app.get('/names', async (req, res) => {
 
   app.post('/userData',async (req,res)=>{
     console.log(req.body.Name);
-    res.stastus(200).send(req.body.Name);
+    res.status(200).send(req.body.Name);
+    const email=req.body.Email;
+    const username=req.body.Name;
+    const password=req.body.Password;
+    const Usr= new User({Email:email,Username:username,Password:password});
+    Usr.save((error,book)=>{
+      if(error){
+        console.log(error);
+      }
+      else{
+        console.log("success");
+      }
+    })
+    console.log(Usr);
   })
 
 app.listen(8080,()=>{
