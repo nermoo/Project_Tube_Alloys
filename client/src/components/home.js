@@ -9,12 +9,17 @@ import axios from 'axios';
 import {useState,useEffect} from 'react';
 import NameList from './nameList';
 import {Grid} from '@material-ui/core';
+import Todo from './dolist';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Done from './done';
+import Add from './add';
 
 const useStyles = makeStyles({
   root: {
     // flexGrow:1,
     marginTop:40,
     backgroundColor:'#b2dfdb',
+    height:500
   },
   bullet: {
     display: 'inline-block',
@@ -36,6 +41,18 @@ const useStyles = makeStyles({
     flexDirection: "row",
     flexWrap:'wrap',
   },
+  list:{
+    overflowY:'auto',
+    height:300
+  },
+  btn:{
+    backgroundColor:'#26c6da',
+    margin:10,
+    paddingLeft:10,
+    paddingRight:10,
+    paddingTop:8,
+    paddingBottom:8
+},
   
 });
 
@@ -68,6 +85,7 @@ console.log(show);
   },[show])
 
   return (
+    <Router>
     <div className={classes.Cards}>
       <Grid item xs={1} sm={1}></Grid>
     <Grid  item xs={10} sm={4}>
@@ -77,10 +95,17 @@ console.log(show);
           To Do
         </Typography>
        <NameList names={name}/>
+       <div className={classes.list}>
+       <Todo/>
+       </div>
       </CardContent>
       <CardActions>
+        
         <Button type="submit" size="small" onClick={handleClick}>Show Names</Button>
         <Button type="submit" size="small" onClick={handleClickng}>Hide Names</Button>
+        <Link to="/add">
+        <Button className={classes.btn}>Add Item</Button>
+        </Link>
       </CardActions>
     </Card>
         </Grid>
@@ -94,16 +119,18 @@ console.log(show);
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           Done
         </Typography>
-       <NameList names={name}/>
+        <div>
+        <Switch>
+        <Route exact path="/" component={Done}/>
+        <Route path="/add" component={Add}/> 
+        </Switch>
+        </div>
       </CardContent>
-      <CardActions>
-        <Button type="submit" size="small" onClick={handleClick}>Show Names</Button>
-        <Button type="submit" size="small" onClick={handleClickng}>Hide Names</Button>
-      </CardActions>
     </Card>
         </Grid>
         <Grid item xs={1} sm={1}></Grid>
         </div> 
+        </Router>
     
    
   );

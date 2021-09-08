@@ -3,7 +3,7 @@ const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
 const axios=require('axios');
-const userNames = require('./models/names');
+const userNames = require('./models/name');
 const User=require('./models/users');
 
 try {

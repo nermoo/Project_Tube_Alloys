@@ -59,7 +59,7 @@ const useStyles = makeStyles({
       }
       
 });
-const Login=()=>{
+const Add=()=>{
 
     const classes=useStyles();
     const [username,setUser]=useState('');
@@ -67,13 +67,7 @@ const Login=()=>{
 
     return(
         <div className={classes.Cards}>
-      <Grid item xs={1} sm={2}></Grid>
-    <Grid  item xs={10} sm={8}>
-          <Card className={classes.root} variant="outlined">
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-          LogIn
-        </Typography>
-      <CardContent>
+      
         
         <TextField
         className={classes.txt}
@@ -84,31 +78,14 @@ const Login=()=>{
           required={true}
           onBlur={e=>setUser(e.target.value)}
         />
-        </CardContent>
-        <CardContent>
-        <TextField
-        className={classes.txt}
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          name={password}
-          autoComplete="current-password"
-          variant="outlined"
-          required={true}
-          onBlur={e=>setPass(e.target.value)}
-        />
-      </CardContent>
-      <CardActions className={classes.loginbtn}>
-          <Button className={classes.btn}>LogIn</Button>
-      </CardActions>
-      <Typography className={classes.signup}>
-        Don't have an account yet?  <Link to='/signup'>SignUp</Link> 
-      </Typography>
-    </Card>
-        </Grid>
-        <Grid item xs={1} sm={2}></Grid>
+        
+          <Button className={classes.btn}>+</Button>
+          <Link to="/">
+          <Button className={classes.btn}> Show completed</Button>
+          </Link>
+    
         </div>
     );
 }
 
-export default Login;
+export default Add;

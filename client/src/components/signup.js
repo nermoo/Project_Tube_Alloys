@@ -103,7 +103,7 @@ const Signup=()=>{
             setMsg("Please fill all the fields");
             
         }else{
-            if(password != passoword2){
+            if(password !== passoword2){
                 setMsg("passwords are not matching");
             }else{
                 setMsg('');
