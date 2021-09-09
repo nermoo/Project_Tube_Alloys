@@ -9,6 +9,11 @@ import {List,
     IconButton,
     makeStyles
 } from '@material-ui/core';
+import {useSelector } from 'react-redux';
+import Add from './add';
+
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +29,7 @@ const Todo=()=>{
 
     const classes=useStyles;
     const [checked, setChecked] = React.useState([0]);
+    const list=useSelector(state=>state.Add);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -37,6 +43,10 @@ const Todo=()=>{
 
     setChecked(newChecked);
   };
+
+  useEffect(()=>{
+
+  },[list])
 
 
 

@@ -2,7 +2,9 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid , Card, CardContent,CardActions, Button, makeStyles, TextField } from '@material-ui/core';
 import {Link } from 'react-router-dom';
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import {addItem} from './../actions';
 
 
 const useStyles = makeStyles({
@@ -62,8 +64,25 @@ const useStyles = makeStyles({
 const Add=()=>{
 
     const classes=useStyles();
-    const [username,setUser]=useState('');
-    const [password,setPass]=useState('');
+    const list=useSelector(state=>state.Add);
+    const [todo,setTodo] = useState('');
+    const dispatch=useDispatch();
+    console.log(list);
+
+
+
+    const addItems=()=>{
+      const item={
+        Todo:todo,
+      };
+      dispatch(addItem(item));
+      console.log(item);
+      
+    }
+
+    useEffect(()=>{
+
+    },[list])
 
     return(
         <div className={classes.Cards}>
@@ -72,14 +91,14 @@ const Add=()=>{
         <TextField
         className={classes.txt}
           id="outlined-username"
-          label="Username"
-          name={username}
+          label="ToDo"
+          name={todo}
           variant="outlined"
           required={true}
-          onBlur={e=>setUser(e.target.value)}
+          onBlur={e=>setTodo(e.target.value)}
         />
         
-          <Button className={classes.btn}>+</Button>
+          <Button className={classes.btn} onClick={addItems}>+</Button>
           <Link to="/">
           <Button className={classes.btn}> Show completed</Button>
           </Link>

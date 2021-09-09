@@ -8,12 +8,7 @@ import Login from './components/login';
 import Signup from './components/signup';
 import Footer from './components/footer';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {createStore} from 'redux';
-import allReducers from './reducers';
-import { Provider } from 'react-redux';
 
-
-var myStore=createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const useStyles = makeStyles({
 
   content:{
@@ -65,4 +60,4 @@ function App() {
   );
 }
 
-export default <Provider store='myStore'>App</Provider>;
+export default App;

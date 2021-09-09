@@ -1,9 +1,11 @@
 
 
-const Login=(state=false,action)=>{
+const Login=(state = false,action)=>{
     switch(action.type){
-        case 'login':
+        case 'change':
             return !state;
+        default:
+            return state;
     }
 }
 

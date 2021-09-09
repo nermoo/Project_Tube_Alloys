@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { Grid , Card, CardContent,CardActions, Button, makeStyles, TextField } from '@material-ui/core';
 import {Link } from 'react-router-dom';
 import { useState} from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 
 
 const useStyles = makeStyles({
@@ -64,6 +65,8 @@ const Login=()=>{
     const classes=useStyles();
     const [username,setUser]=useState('');
     const [password,setPass]=useState('');
+    const loginStatus=useSelector(state=>state.Login);
+    console.log(loginStatus);
 
     return(
         <div className={classes.Cards}>
