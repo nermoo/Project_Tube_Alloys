@@ -1,3 +1,6 @@
+import axios from 'axios';
+
+
 var list=[{item:"water the plants"}];
 const addItem=(state=list,action)=>{
 

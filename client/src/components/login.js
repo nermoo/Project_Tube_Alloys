@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { Grid , Card, CardContent,CardActions, Button, makeStyles, TextField } from '@material-ui/core';
 import {Link } from 'react-router-dom';
 import { useState} from 'react';
+import axios from 'axios';
 import { useSelector,useDispatch } from 'react-redux';
 
 
@@ -57,6 +58,9 @@ const useStyles = makeStyles({
       signup:{
         marginTop:20,
         marginBottom:20
+      },
+      msg:{
+        color:'red'
       }
       
 });
@@ -65,8 +69,23 @@ const Login=()=>{
     const classes=useStyles();
     const [username,setUser]=useState('');
     const [password,setPass]=useState('');
+    const [msg,setMsg]=useState('');
     const loginStatus=useSelector(state=>state.Login);
     console.log(loginStatus);
+
+    const log=()=>{
+      if(username==='' || password===''){
+        setMsg('Please enter both Username and password');
+      }else{
+        axios.post('http://localhost:8080/login',{
+                  Name:username,
+                  Password:password
+                }).then(res=>{
+                  console.log(res);
+                })
+      }
+
+      }
 
     return(
         <div className={classes.Cards}>
@@ -76,6 +95,7 @@ const Login=()=>{
           <Typography className={classes.title} color="textSecondary" gutterBottom>
           LogIn
         </Typography>
+        <Typography className={classes.msg}>{msg}</Typography>
       <CardContent>
         
         <TextField
@@ -102,7 +122,7 @@ const Login=()=>{
         />
       </CardContent>
       <CardActions className={classes.loginbtn}>
-          <Button className={classes.btn}>LogIn</Button>
+          <Button className={classes.btn} onClick={log}>LogIn</Button>
       </CardActions>
       <Typography className={classes.signup}>
         Don't have an account yet?  <Link to='/signup'>SignUp</Link> 

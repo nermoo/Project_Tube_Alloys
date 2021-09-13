@@ -61,6 +61,9 @@ const useStyles = makeStyles({
       login:{
         marginTop:20,
         marginBottom:20
+      },
+      msg:{
+        color:'red'
       }
       
 });
@@ -110,12 +113,14 @@ const Signup=()=>{
                 setreg(true);
                 console.log("done");
                 console.log(email,username,password);
-                const res= axios.post('http://localhost:8080/userData',{
+                axios.post('http://localhost:8080/userData',{
                   Name:username,
                   Email:email,
                   Password:password
-                });
-                console.log(res);
+                }).then(res=>{
+                  console.log(res.statusText);
+                })
+                
 
 
             }
@@ -138,7 +143,7 @@ const Signup=()=>{
           <Typography className={classes.title} color="textSecondary" gutterBottom>
           Register
         </Typography>
-        <Typography>{msg}</Typography>
+        <Typography className={classes.msg}>{msg}</Typography>
       <CardContent>
         
         <TextField
