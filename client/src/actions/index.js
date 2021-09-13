@@ -9,3 +9,10 @@ export const addItem=(item)=>{
         payload:item
     }
 }
+
+export const user=(name)=>{
+    return{
+        type:'new',
+        payload:name
+    }
+}

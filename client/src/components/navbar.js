@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +38,15 @@ const useStyles = makeStyles((theme) => ({
 
  const Navbar=()=> {
   const classes = useStyles();
+  const log=useSelector(state=>state.Login);
+  var user='';
+  console.log(log);
+
+  if(log===false){
+    user='Login/Signup';
+  }else{
+    user='Aravinda';
+  }
   
 
 
@@ -52,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Link to='/login'>
+              <Typography>{user}</Typography>
             <IconButton
               edge="end"
               aria-label="account of current user"

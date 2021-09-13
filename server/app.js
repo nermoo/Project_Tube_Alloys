@@ -9,6 +9,8 @@ const bcrypt= require('bcrypt');
 const passport=require('passport');
 const localStrategy=require('passport-local').Strategy;
 const session=require('express-session');
+const cors=require('cors');
+const cookieParser=require('cookie-parser');
 
 try {
     mongoose.connect('mongodb+srv://nermo:nermo@userdata.knaz0.mongodb.net/UserData?retryWrites=true&w=majority',{ useUnifiedTopology: true });
@@ -22,12 +24,16 @@ try {
 }
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(cors({
+  origin:"http://localhost:3000",
+  credential:true
+}))
 app.use(session({
   secret:"nermo",
   resave:false,
   saveUninitialized: true
 }))
-
+app.use(cookieParser('nermo'))
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -42,13 +48,11 @@ app.use(function(req, res, next) {
   });
 
   passport.serializeUser(function(user,done){
-    console.log('from se');
       done(null,user.id)
   });
 
   passport.deserializeUser(function(id,done){
     User.findById(id,function(err,user){
-      console.log('form des');
       done(err,user);
     })
   })
@@ -60,18 +64,15 @@ app.use(function(req, res, next) {
       passwordField:'Password'
   },
     function(username,password,done){
-    console.log(username,password);
     User.findOne({Username:username},function(err,user){
       if (err)  return done(err);
-      if (!user) return done(null,false,{message:'Incorrect Username'});
+      if (!user) return done(null,false,{message:'Incorrect Username',status:false});
 
       bcrypt.compare(password,user.Password,function(err,res){
-        console.log('yo');
           if(err) return done(err);
-          if(res===false) return done(null,false,{message:'Incorrect password'});
-          console.log("im here");
+          if(res===false) return done(null,false,{message:'Incorrect password',status:false});
           console.log(user);
-          return done(null,user)
+          return done(null,user,{message:'success',status:true});
           
 
       })
@@ -81,7 +82,7 @@ app.use(function(req, res, next) {
 
 
 app.post('/post',(req,res)=>{
-    // console.log(req);
+    
     const email=req.body.email;
     console.log(email);
     res.send(`${email} is da email`);
@@ -127,12 +128,22 @@ app.get('/names', async (req, res) => {
   })
 
 
-  app.post('/login', passport.authenticate('local',{
-    successRedirect:'http://localhost:3000/',
-    failureRedirect:'http://localhost:3000/login?error=true'
+  app.post('/login',(req,res,next)=>{
+    passport.authenticate("local",(err,user,info)=>{
+      if(err) res.send({info:info});
+      if(!user) res.send({info:info});
+      else{
+        req.login(user,(err)=>{
+          if(err) throw err;
+          res.send({user:req.user,info:info});
+          console.log(info.status);
+        })
+      }
+    })
+    (req,res,next)
   })
-  
-  )
+
+
 
 app.listen(8080,()=>{
     console.log("server is active");

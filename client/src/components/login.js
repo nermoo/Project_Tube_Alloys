@@ -5,6 +5,7 @@ import {Link } from 'react-router-dom';
 import { useState} from 'react';
 import axios from 'axios';
 import { useSelector,useDispatch } from 'react-redux';
+import {login} from '../actions';
 
 
 const useStyles = makeStyles({
@@ -70,8 +71,9 @@ const Login=()=>{
     const [username,setUser]=useState('');
     const [password,setPass]=useState('');
     const [msg,setMsg]=useState('');
-    const loginStatus=useSelector(state=>state.Login);
-    console.log(loginStatus);
+    // const loginStatus=useSelector(state=>state.Login);
+    // console.log(loginStatus);
+    const dispatch=useDispatch();
 
     const log=()=>{
       if(username==='' || password===''){
@@ -82,6 +84,14 @@ const Login=()=>{
                   Password:password
                 }).then(res=>{
                   console.log(res);
+                  const status=res.data.info.status;
+                  const message=res.data.info.message;
+                  if(status===true){
+                    setMsg('');
+                    dispatch(login());
+                  }else{
+                    setMsg(message);
+                  }
                 })
       }
 
