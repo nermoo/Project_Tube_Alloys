@@ -4,7 +4,7 @@ const app=express();
 const mongoose=require('mongoose');
 const userNames = require('./models/name');
 const User=require('./models/users');
-const Items=require('./models/todoItems');
+const Item=require('./models/todoItems');
 const bcrypt= require('bcrypt');
 const passport=require('passport');
 const localStrategy=require('passport-local').Strategy;
@@ -81,11 +81,21 @@ app.use(function(req, res, next) {
 
 
 
-app.post('/post',(req,res)=>{
+app.post('/add',(req,res)=>{
     
-    const email=req.body.email;
-    console.log(email);
-    res.send(`${email} is da email`);
+   const User=req.body.User;
+   const Todo=req.body.Todo;
+   const Flag=req.body.Flag;
+
+   const item=new Item({username:User,item:Todo,flag:Flag})
+   item.save((err,item)=>{
+     if(err) {res.send(err);
+    }else{
+      console.log(item);
+      res.send(item);
+    }
+
+   })
 })
 
 app.get('/names', async (req, res) => {

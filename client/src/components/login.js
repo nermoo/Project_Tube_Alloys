@@ -6,6 +6,8 @@ import { useState} from 'react';
 import axios from 'axios';
 import { useSelector,useDispatch } from 'react-redux';
 import {login} from '../actions';
+import {user} from '../actions';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -71,6 +73,7 @@ const Login=()=>{
     const [username,setUser]=useState('');
     const [password,setPass]=useState('');
     const [msg,setMsg]=useState('');
+    let history=useHistory();
     // const loginStatus=useSelector(state=>state.Login);
     // console.log(loginStatus);
     const dispatch=useDispatch();
@@ -89,6 +92,10 @@ const Login=()=>{
                   if(status===true){
                     setMsg('');
                     dispatch(login());
+                    dispatch(user(res.data.user.Username));
+                    localStorage.setItem('user',res.data.user.Username);
+                    localStorage.setItem('loginStatus',status);
+                    history.push('/');
                   }else{
                     setMsg(message);
                   }

@@ -62,27 +62,21 @@ export default function OutlinedCard() {
   const [show,setShow]=useState(false);
   const [name,setName]=useState([]);
 
-  const handleClick=(e)=>{
-      setShow(true);
-  }
-  const handleClickng=(e)=>{
-    setShow(false);
-}
 
-  useEffect(()=>{
+//   useEffect(()=>{
 
-    if(show===true){
-     axios.get('http://localhost:8080/names')
-    .then((response) => {
-    setName(response.data);
-  }
-)}
-else{
-  console.log("nope");
-  setName([]);
-}
-console.log(show);
-  },[show])
+//     if(show===true){
+//      axios.get('http://localhost:8080/names')
+//     .then((response) => {
+//     setName(response.data);
+//   }
+// )}
+// else{
+//   console.log("nope");
+//   setName([]);
+// }
+// console.log(show);
+//   },[show])
 
   return (
     <Router>
@@ -101,8 +95,6 @@ console.log(show);
       </CardContent>
       <CardActions>
         
-        <Button type="submit" size="small" onClick={handleClick}>Show Names</Button>
-        <Button type="submit" size="small" onClick={handleClickng}>Hide Names</Button>
         <Link to="/add">
         <Button className={classes.btn}>Add Item</Button>
         </Link>

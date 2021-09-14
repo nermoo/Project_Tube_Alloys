@@ -5,9 +5,13 @@ const items=new mongoose.Schema({
         type:String,
         require:true,
     },
-    Item:{
+    item:{
         type:String,
         require:true,
+    },
+    flag:{
+        type:String,
+        require:true
     }
 })
 

@@ -44,7 +44,7 @@ function App() {
           <Route path="/account">
             
           </Route>
-          <Route path="/login" component={Login}/>
+          <Route path="/login"  component={Login}/>
           <Route path='/signup' component={Signup}/>
         </Switch>
 

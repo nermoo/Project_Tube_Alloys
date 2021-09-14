@@ -5,6 +5,7 @@ import {Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import {addItem} from './../actions';
+import axios from 'axios';
 
 
 const useStyles = makeStyles({
@@ -58,6 +59,9 @@ const useStyles = makeStyles({
       signup:{
         marginTop:20,
         marginBottom:20
+      },
+      msg:{
+        color:'red'
       }
       
 });
@@ -66,28 +70,42 @@ const Add=()=>{
     const classes=useStyles();
     const list=useSelector(state=>state.Add);
     const [todo,setTodo] = useState('');
+    const [msg,setMsg]=useState('');
     const dispatch=useDispatch();
     console.log(list);
+    const loginStatus=localStorage.getItem('loginStatus')==='true';
+    const user=loginStatus ? localStorage.getItem('user'):'';
 
 
 
     const addItems=()=>{
-      const item={
-        Todo:todo,
-      };
-      dispatch(addItem(item));
-      console.log(item);
+      
+      if(todo===''){
+        setMsg('Please enter an item');
+      }else{
+        setMsg('');
+        console.log("done");
+        axios.post('http://localhost:8080/add',{
+          User:user,
+          Todo:todo,
+          Flag:'todo'
+        }).then(res=>{
+          console.log(res.statusText);
+        })
+        
+
+      }
       
     }
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-    },[list])
+    // },[list])
 
     return(
         <div className={classes.Cards}>
       
-        
+        <Typography className={classes.msg}>{msg}</Typography>
         <TextField
         className={classes.txt}
           id="outlined-username"
