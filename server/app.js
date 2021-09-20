@@ -98,11 +98,16 @@ app.post('/add',(req,res)=>{
    })
 })
 
-app.get('/names', async (req, res) => {
-    const users = await userNames.find({},{_id:0});
+app.post('/items', async (req, res) => {
+
+    const user=req.body.user;
+    const flag=req.body.flag;
+    console.log(req.body);
+    const items = await Item.find({username:user,flag:flag},{_id:0});
+    console.log(items);
   
     try {
-      res.send(users);
+      res.send(items);
     } catch (error) {
       res.status(500).send(error);
     }
@@ -138,13 +143,13 @@ app.get('/names', async (req, res) => {
   })
 
 
-  app.post('/login',(req,res,next)=>{
+  app.post('/login', async (req,res,next)=>{
     passport.authenticate("local",(err,user,info)=>{
       if(err) res.send({info:info});
       if(!user) res.send({info:info});
       else{
         req.login(user,(err)=>{
-          if(err) throw err;
+          if(err) console.log(err); 
           res.send({user:req.user,info:info});
           console.log(info.status);
         })

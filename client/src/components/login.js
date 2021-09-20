@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useSelector,useDispatch } from 'react-redux';
 import {login} from '../actions';
 import {user} from '../actions';
-import { useHistory } from 'react-router-dom';
+import { useHistory,Redirect } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -67,8 +67,10 @@ const useStyles = makeStyles({
       }
       
 });
-const Login=()=>{
+const Login=(state)=>{
 
+  
+    
     const classes=useStyles();
     const [username,setUser]=useState('');
     const [password,setPass]=useState('');
@@ -91,10 +93,11 @@ const Login=()=>{
                   const message=res.data.info.message;
                   if(status===true){
                     setMsg('');
-                    dispatch(login());
-                    dispatch(user(res.data.user.Username));
+                    
                     localStorage.setItem('user',res.data.user.Username);
                     localStorage.setItem('loginStatus',status);
+                    dispatch(login(res.data.user.Username));
+                    dispatch(user(res.data.user.Username));
                     history.push('/');
                   }else{
                     setMsg(message);
@@ -103,6 +106,9 @@ const Login=()=>{
       }
 
       }
+      // if(state.authorized===true){
+      //   return <Redirect to='/logout'/>; 
+      // }
 
     return(
         <div className={classes.Cards}>

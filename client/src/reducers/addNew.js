@@ -1,13 +1,19 @@
-import axios from 'axios';
 
 
-var list=[{item:"water the plants"}];
-const addItem=(state=list,action)=>{
 
-    const item=action.payload;
+const addItem=(state=[],action)=>{
+
+    
+    
     switch(action.type){
         case 'add':
-            return (list.unshift(item));
+            var list=[];
+            const item=action.payload;
+        console.log(item);
+        item.map((is)=>{
+        list.push(is.item)});
+        console.log(list);
+            return list;
 
         default:
             return list;

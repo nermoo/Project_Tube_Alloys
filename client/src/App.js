@@ -7,6 +7,7 @@ import Navbar from './components/navbar';
 import Login from './components/login';
 import Signup from './components/signup';
 import Footer from './components/footer';
+import Logout from './components/logut';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -30,6 +31,8 @@ const useStyles = makeStyles({
 function App() {
 
   const classes=useStyles();
+  const status=localStorage.getItem('loginStatus')==='true';
+  console.log(status);
   return (
     <div>
       <Router>
@@ -38,14 +41,14 @@ function App() {
       <Grid className={classes.Ccards} container spacing={3}>
         
         <Switch>
-          <Route exact path="/">
-            <Home/>
-          </Route>
+          <Route exact path="/" component={()=><Home authorized={status}/>}/>
+           
           <Route path="/account">
             
           </Route>
-          <Route path="/login"  component={Login}/>
+          <Route path="/login"  component={()=><Login authorized={status}/>}/>
           <Route path='/signup' component={Signup}/>
+          <Route path='/logout' component={()=><Logout authorized={status}/>}/>
         </Switch>
 
       

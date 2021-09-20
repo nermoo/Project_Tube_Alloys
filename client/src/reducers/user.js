@@ -5,6 +5,8 @@ const User=(state=user,action)=>{
     switch(action.type){
         case 'new':
             return user=username;
+        case 'delete':
+                    user=''
         default:
             return user;
     }

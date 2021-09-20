@@ -1,6 +1,8 @@
-export const login=()=>{
+export const login=(name)=>{
     return{
-    type:'change'}
+    type:'change',
+    payload:name
+}
 }
 
 export const addItem=(item)=>{

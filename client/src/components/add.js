@@ -1,10 +1,9 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { Grid , Card, CardContent,CardActions, Button, makeStyles, TextField } from '@material-ui/core';
+import { Button, makeStyles, TextField } from '@material-ui/core';
 import {Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import {addItem} from './../actions';
 import axios from 'axios';
 
 
@@ -90,6 +89,7 @@ const Add=()=>{
           Todo:todo,
           Flag:'todo'
         }).then(res=>{
+          
           console.log(res.statusText);
         })
         
@@ -98,9 +98,9 @@ const Add=()=>{
       
     }
 
-    // useEffect(()=>{
-
-    // },[list])
+    useEffect(()=>{
+      
+    },[todo])
 
     return(
         <div className={classes.Cards}>
