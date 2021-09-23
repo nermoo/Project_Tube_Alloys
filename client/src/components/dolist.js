@@ -8,10 +8,13 @@ import {List,
     ListItemSecondaryAction,
     IconButton,
     makeStyles,
-    Typography
+    Typography,
+    Button
 } from '@material-ui/core';
-import {useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import DeleteIcon from '@material-ui/icons/Delete';
+import {addItem} from './../actions';
 
 
 
@@ -28,17 +31,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Todo=(props)=>{
 
-    // const list=props.List;
-    // console.log(list);
-    // const list=useSelector(state=>state.Add);
-    var list=['aravinda'];
-    console.log(list);
     const classes=useStyles;
+    const [list,setList]=useState([]);
+    const dispatch=useDispatch();
+    const updater=useSelector(state=>state.Add);
+    
+    
+    
     const [checked, setChecked] = React.useState([0]);
-    // const list=useSelector(state=>state.Add);
-    // const [list,setList]=useState([]);
-
-  const handleToggle = (value) => () => {
+    const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -49,65 +50,70 @@ const Todo=(props)=>{
     }
 
     setChecked(newChecked);
-  };
-// try {
- 
-//   const loginStatus=localStorage.getItem('loginStatus')==='true';
-//     const username=loginStatus ? localStorage.getItem('user'):'';
-//     console.log(loginStatus,username);
-//      axios.post('http://localhost:8080/items',{
-    
-//       user:username,
-//       flag:"todo" 
-//     })
-//     .then((response) => {
-      
-//       console.log(response);
-//       const items=[];
-//     response.data.map((item)=>{
-//       items.push(item.item);
-//     })
-//     // const newlist=items.concat(list);
-//   }
+   };
+
+   useEffect(()=>{
+     let user=localStorage.getItem('user');
+     let newAr=[];
+     try {
+       
+       axios.post('http://localhost:8080/items',{
+       
+         user:user,
+         flag:"todo" 
+       })
+       .then((response) => {
+         console.log(response.data);
+         newAr=response.data.map(titem=>([titem.item]))
+         console.log(newAr);
+         setList(newAr);
+        //  dispatch(addItem(user));
+     }
+     
+     )
+     } catch (error) {
+       console.log(error);
+     }
+   },[updater])
   
-//   )
-// } catch (error) {
-//   console.log(error);
 
-// }
-  
-
-  useEffect(()=>{
-    console.log('hello');
-    },[list])
-
-if(list.length===0){
-  return <Typography>Loading</Typography>
-}
+ if(list.length===0){
+   return(
+     <div>Loading...</div>
+   )
+ }
 
     return(
         <List className={classes.root}>
           <Typography></Typography>
       {list.map((value) => {
+        console.log(value);
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}>
+          <ListItem key={value.id} role={undefined} dense >
             <ListItemIcon>
               <Checkbox
+                button onClick={handleToggle(value)}
                 edge="start"
                 checked={checked.indexOf(value) !== -1}
                 tabIndex={-1}
                 disableRipple
                 inputProps={{ 'aria-labelledby': labelId }}
               />
+              
             </ListItemIcon>
             <ListItemText id={labelId} primary={value} />
-            <ListItemSecondaryAction>
+            <Button>
+
+            <DeleteIcon/>
+            </Button>
+            {/* <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="comments">
               </IconButton>
-            </ListItemSecondaryAction>
+            </ListItemSecondaryAction> */}
           </ListItem>
+          
         );
       })}
     </List>

@@ -76,8 +76,6 @@ const Login=(state)=>{
     const [password,setPass]=useState('');
     const [msg,setMsg]=useState('');
     let history=useHistory();
-    // const loginStatus=useSelector(state=>state.Login);
-    // console.log(loginStatus);
     const dispatch=useDispatch();
 
     const log=()=>{
@@ -93,11 +91,9 @@ const Login=(state)=>{
                   const message=res.data.info.message;
                   if(status===true){
                     setMsg('');
-                    
+                    //methna tika thm aul
                     localStorage.setItem('user',res.data.user.Username);
                     localStorage.setItem('loginStatus',status);
-                    dispatch(login(res.data.user.Username));
-                    dispatch(user(res.data.user.Username));
                     history.push('/');
                   }else{
                     setMsg(message);

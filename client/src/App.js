@@ -9,6 +9,8 @@ import Signup from './components/signup';
 import Footer from './components/footer';
 import Logout from './components/logut';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 
 const useStyles = makeStyles({
 
@@ -31,8 +33,13 @@ const useStyles = makeStyles({
 function App() {
 
   const classes=useStyles();
-  const status=localStorage.getItem('loginStatus')==='true';
+  // const status=localStorage.getItem('loginStatus')==='true';
+  const lgstatus=useSelector(state=>state.Login);
+  const [status,setStatus]=useState(lgstatus)
   console.log(status);
+  useEffect(()=>{
+    setStatus(lgstatus);
+  },status);
   return (
     <div>
       <Router>

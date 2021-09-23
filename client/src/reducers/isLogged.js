@@ -2,11 +2,13 @@
 const loginStatus=localStorage.getItem('loginStatus')==='true';
 const username=loginStatus ? localStorage.getItem('user'):'';
 const Login=(state = loginStatus,action)=>{
-    let name=username;
-    console.log(name);
+    if(username===''){
+        return state=false;
+    }
+    // console.log(username);
     switch(action.type){
         case 'change':
-            return !state;
+            return state;
         default:
             return state;
     }

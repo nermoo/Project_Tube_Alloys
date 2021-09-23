@@ -8,6 +8,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -77,7 +78,7 @@ const Signup=()=>{
     //     password1:'',
     //     password2:''
     // });
-
+    const history=useHistory();
     const [email,setMail]=useState('');
     const [username,setname]=useState('');
     const [password,setPass]=useState('');
@@ -119,6 +120,7 @@ const Signup=()=>{
                   Password:password
                 }).then(res=>{
                   console.log(res.statusText);
+                  history.push('login');
                 })
                 
 

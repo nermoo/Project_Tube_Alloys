@@ -41,26 +41,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
  const Navbar=()=> {
-   const status=useSelector(state=>state.Login);
+   
   const classes = useStyles();
-  const [user,setUser]=useState('');
-  const [log,setStatus]=useState(false);
-  const [name,setName]=useState('');
-  // var log=useSelector(state=>state.Login);
-  // const user=useSelector(state=>state.User);
+
   
-  useEffect(()=>{
-    const loginStatus=localStorage.getItem('loginStatus')==='true';
-    const username=loginStatus ? localStorage.getItem('user'):'';
-    setUser(username);
-    setStatus(loginStatus);
-    console.log(log,user);
-    if(log===false){
-      setName('Login/Signup');
-    }else{
-      setName(user);
-    }
-  },[user,log])
+ 
 
   
   
@@ -88,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
               color="inherit"
               
             >
-              <Typography>{name  }</Typography>
+              <Typography>koli</Typography>
               <AccountCircle/>
             </IconButton>
             </Link>

@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import Done from './done';
 import Add from './add';
 import { useHistory,Redirect } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../actions';
 
 
@@ -62,13 +62,7 @@ const useStyles = makeStyles({
 
 export default function OutlinedCard(state) {
 
-  console.log(state);
-  const dispatch=useDispatch();
-  const classes = useStyles();
-  const [show,setShow]=useState(false);
-  const [name,setName]=useState([]);
-  const [list,setList]=useState([]);
-
+  const classes=useStyles();
   // const handleToggle = (value) => () => {
   //   const currentIndex = checked.indexOf(value);
   //   const newChecked = [...checked];
@@ -81,25 +75,18 @@ export default function OutlinedCard(state) {
 
   //   setChecked(newChecked);
   // };
+
+    
 try {
  
-  const loginStatus=localStorage.getItem('loginStatus')==='true';
-    const username=loginStatus ? localStorage.getItem('user'):'';
-    console.log(loginStatus,username);
+ //username should be send to the database to get the particular items. 
      axios.post('http://localhost:8080/items',{
     
-      user:username,
+      user:'koli',
       flag:"todo" 
     })
     .then((response) => {
-      // let items=[];
-      const data=response.data;
-      console.log(data);
-      dispatch(addItem(data));
-    //   console.log(response);
-    // response.data.map((item)=>{
-    // //   items.push(item.item);
-    // })
+      
   }
   
   )
@@ -108,10 +95,7 @@ try {
 
 }
 
-  // useEffect(()=>{
 
-    
-  // })
 if(state.authorized===false){
   return <Redirect to='login'/>
 }
@@ -126,9 +110,8 @@ if(state.authorized===false){
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           To Do
         </Typography>
-       <NameList names={name}/>
        <div className={classes.list}>
-       <Todo List={list}/>
+       <Todo/>
        </div>
       </CardContent>
       <CardActions>

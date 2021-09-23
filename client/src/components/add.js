@@ -5,6 +5,7 @@ import {Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import axios from 'axios';
+import { addItem } from '../actions';
 
 
 const useStyles = makeStyles({
@@ -83,13 +84,12 @@ const Add=()=>{
         setMsg('Please enter an item');
       }else{
         setMsg('');
-        console.log("done");
         axios.post('http://localhost:8080/add',{
           User:user,
           Todo:todo,
           Flag:'todo'
         }).then(res=>{
-          
+          dispatch(addItem(todo));
           console.log(res.statusText);
         })
         
@@ -98,9 +98,6 @@ const Add=()=>{
       
     }
 
-    useEffect(()=>{
-      
-    },[todo])
 
     return(
         <div className={classes.Cards}>

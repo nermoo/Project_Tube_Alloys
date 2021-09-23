@@ -1,19 +1,14 @@
 
 
-
-const addItem=(state=[],action)=>{
-
-    
-    
+ var list=[];
+const addItem=(state=list,action)=>{
+    let item=action.payload;
     switch(action.type){
         case 'add':
-            var list=[];
-            const item=action.payload;
-        console.log(item);
-        item.map((is)=>{
-        list.push(is.item)});
-        console.log(list);
-            return list;
+            console.log(item);
+            console.log('wassup');
+            const newList=[...list,item];
+            return newList;
 
         default:
             return list;
