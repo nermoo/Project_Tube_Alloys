@@ -113,6 +113,23 @@ app.post('/items', async (req, res) => {
     }
   });
 
+
+  app.post('/doneItems', async (req, res) => {
+
+    const user=req.body.user;
+    const flag=req.body.flag;
+    console.log(req.body);
+    const items = await Item.find({username:user,flag:flag},{_id:0});
+    console.log(items);
+  
+    try {
+      res.send(items);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+
   app.post('/userData',async (req,res)=>{
     
     const email=req.body.Email;
@@ -158,6 +175,32 @@ app.post('/items', async (req, res) => {
     (req,res,next)
   })
 
+  app.post('/updateDone',async (req,res,next)=>{
+    const user=req.body.user;
+    const flag=req.body.flag;
+    const item=req.body.item[0];
+ 
+    try {
+      const result=await Item.updateOne({username:user,item:item},{$set:{flag:flag}});
+      console.log(result);      
+      res.send(result);
+    } catch (error) {
+      console.log(error);
+    }
+  })
+
+  app.post('/deleteItem',async (req,res,next)=>{
+    const user=req.body.user;
+    const item=req.body.item[0];
+ 
+    try {
+      const result=await Item.deleteOne({username:user,item:item});
+      console.log(result);
+      res.send(result);
+    } catch (error) {
+      console.log(error);
+    }
+  })
 
 
 app.listen(8080,()=>{

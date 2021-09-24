@@ -11,7 +11,7 @@ import NameList from './nameList';
 import {Grid} from '@material-ui/core';
 import Todo from './dolist';
 import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
-import Done from './done';
+import Done from './donelist';
 import Add from './add';
 import { useHistory,Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

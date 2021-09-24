@@ -2,11 +2,7 @@ import React from 'react';
 import {useState, useEffect } from 'react';
 import {List,
     ListItem,
-    ListItemIcon,
-    Checkbox,
     ListItemText,
-    ListItemSecondaryAction,
-    IconButton,
     makeStyles,
     Typography,
     Button
@@ -14,6 +10,7 @@ import {List,
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CheckIcon from '@material-ui/icons/Check';
 import {addItem} from './../actions';
 
 
@@ -29,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const Todo=(props)=>{
+const Todo=()=>{
 
     const classes=useStyles;
     const [list,setList]=useState([]);
@@ -38,19 +35,35 @@ const Todo=(props)=>{
     
     
     
-    const [checked, setChecked] = React.useState([0]);
-    const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+   const updateList=(item)=>{
+     let user=localStorage.getItem('user');
+     try {
+       axios.post('http://localhost:8080/updateDone',{
+         user:user,
+        flag:'done',
+        item:item
+       }).then((res)=>{
+        dispatch(addItem(user));
+       })
+     } catch (error) {
+       console.log(error);
+     }
+   }
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+
+   const deleteItem=(item)=>{
+    let user=localStorage.getItem('user');
+    try {
+      axios.post('http://localhost:8080/deleteItem',{
+        user:user,
+        item:item
+      }).then((res)=>{
+       dispatch(addItem(user));
+      })
+    } catch (error) {
+      console.log(error);
     }
-
-    setChecked(newChecked);
-   };
+   }
 
    useEffect(()=>{
      let user=localStorage.getItem('user');
@@ -63,11 +76,9 @@ const Todo=(props)=>{
          flag:"todo" 
        })
        .then((response) => {
-         console.log(response.data);
          newAr=response.data.map(titem=>([titem.item]))
-         console.log(newAr);
          setList(newAr);
-        //  dispatch(addItem(user));
+        
      }
      
      )
@@ -87,12 +98,11 @@ const Todo=(props)=>{
         <List className={classes.root}>
           <Typography></Typography>
       {list.map((value) => {
-        console.log(value);
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <ListItem key={value.id} role={undefined} dense >
-            <ListItemIcon>
+          <ListItem key={value} role={undefined} dense >
+            {/* <ListItemIcon>
               <Checkbox
                 button onClick={handleToggle(value)}
                 edge="start"
@@ -101,12 +111,15 @@ const Todo=(props)=>{
                 disableRipple
                 inputProps={{ 'aria-labelledby': labelId }}
               />
-              
-            </ListItemIcon>
+               
+            </ListItemIcon> */}
             <ListItemText id={labelId} primary={value} />
             <Button>
-
-            <DeleteIcon/>
+             <CheckIcon name={value} button onClick={()=>{updateList(value)}}
+            />  
+            </Button>
+            <Button>
+            <DeleteIcon name={value} button onClick={()=>{deleteItem(value)}}/>
             </Button>
             {/* <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="comments">
