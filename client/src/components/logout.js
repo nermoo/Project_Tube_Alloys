@@ -1,7 +1,10 @@
 import React from "react";
 import { CardActions, Button, Grid, Card, makeStyles } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { useHistory,Redirect } from "react-router-dom";
+import {addItem} from './../actions';
+import {useDispatch } from 'react-redux';
+import {login } from './../actions';
+
 
 const useStyles = makeStyles({
     root: {
@@ -66,11 +69,17 @@ const Logout=(state)=>{
 
     const history=useHistory();
     const classes=useStyles();
+    const dispatch=useDispatch();
+
+
     if(state.authorized===false){
         return <Redirect to='login'/>
     }
     const logout=()=>{
         localStorage.clear();
+        localStorage.setItem('loginStatus',false);
+        dispatch(addItem('user3'));
+        dispatch(login('logout'));
         history.push('/login');
 
     }

@@ -7,10 +7,10 @@ import Navbar from './components/navbar';
 import Login from './components/login';
 import Signup from './components/signup';
 import Footer from './components/footer';
-import Logout from './components/logut';
+import Logout from './components/logout';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import {  useEffect } from 'react';
 
 const useStyles = makeStyles({
 
@@ -34,12 +34,14 @@ function App() {
 
   const classes=useStyles();
   // const status=localStorage.getItem('loginStatus')==='true';
-  const lgstatus=useSelector(state=>state.Login);
-  const [status,setStatus]=useState(lgstatus)
-  console.log(status);
+  const status=useSelector(state=>state.Login);
+ 
+
+
+  
   useEffect(()=>{
-    setStatus(lgstatus);
-  },status);
+    
+  },[status]);
   return (
     <div>
       <Router>

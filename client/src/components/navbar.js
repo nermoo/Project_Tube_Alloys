@@ -8,9 +8,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import Login from './../reducers/isLogged';
-import { user } from './../actions/index';
-import names from './nameList';
+import {Button} from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import {addItem} from './../actions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,8 +43,27 @@ const useStyles = makeStyles((theme) => ({
  const Navbar=()=> {
    
   const classes = useStyles();
+  const dispatch=useDispatch();
+  const updater=useSelector(state=>state.Add);
+  const log=useSelector(state=>state.Login);
+  console.log(log);
+  const [showName,setName]=useState("login/signup");
 
-  
+  const home=()=>{
+    dispatch(addItem('user'));
+  }
+ 
+  useEffect(()=>{
+
+    let user=localStorage.getItem('user');
+    if(log===false){
+      setName("login/signup")
+      console.log('no user');
+    }else{
+      setName(user);
+    }
+  },[log])
+
  
 
   
@@ -57,7 +76,9 @@ const useStyles = makeStyles((theme) => ({
         <Toolbar>
           <Link to="/">
           <Typography className={classes.title} variant="h6" noWrap>
+            <Button onClick={home}>
             To Do
+            </Button>
           </Typography>
           </Link>
           <div className={classes.grow} />
@@ -73,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
               color="inherit"
               
             >
-              <Typography>koli</Typography>
+              <Typography>{showName}  &nbsp;</Typography>
               <AccountCircle/>
             </IconButton>
             </Link>

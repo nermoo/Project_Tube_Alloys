@@ -2,12 +2,12 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid , Card, CardContent,CardActions, Button, makeStyles, TextField } from '@material-ui/core';
 import {Link } from 'react-router-dom';
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector,useDispatch } from 'react-redux';
 import {login} from '../actions';
-import {user} from '../actions';
 import { useHistory,Redirect } from 'react-router-dom';
+import {addItem} from './../actions';
 
 
 const useStyles = makeStyles({
@@ -75,6 +75,7 @@ const Login=(state)=>{
     const [username,setUser]=useState('');
     const [password,setPass]=useState('');
     const [msg,setMsg]=useState('');
+    const updater=useSelector(state=>state.Add);
     let history=useHistory();
     const dispatch=useDispatch();
 
@@ -93,7 +94,9 @@ const Login=(state)=>{
                     setMsg('');
                     //methna tika thm aul
                     localStorage.setItem('user',res.data.user.Username);
-                    localStorage.setItem('loginStatus',status);
+                    localStorage.setItem('loginStatus',true);
+                    dispatch(addItem('user'));
+                    dispatch(login("login"));
                     history.push('/');
                   }else{
                     setMsg(message);
@@ -102,13 +105,21 @@ const Login=(state)=>{
       }
 
       }
+
+      useEffect(()=>{
+
+      },[updater])
+
       // if(state.authorized===true){
       //   return <Redirect to='/logout'/>; 
       // }
 
+
     return(
         <div className={classes.Cards}>
+          
       <Grid item xs={1} sm={2}></Grid>
+      
     <Grid  item xs={10} sm={8}>
           <Card className={classes.root} variant="outlined">
           <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -142,6 +153,10 @@ const Login=(state)=>{
       </CardContent>
       <CardActions className={classes.loginbtn}>
           <Button className={classes.btn} onClick={log}>LogIn</Button>
+          <Link to='logout'>
+
+          <Button className={classes.btn} >Logout</Button>
+          </Link>
       </CardActions>
       <Typography className={classes.signup}>
         Don't have an account yet?  <Link to='/signup'>SignUp</Link> 
@@ -149,6 +164,7 @@ const Login=(state)=>{
     </Card>
         </Grid>
         <Grid item xs={1} sm={2}></Grid>
+        
         </div>
     );
 }

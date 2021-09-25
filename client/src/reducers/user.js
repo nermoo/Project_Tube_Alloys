@@ -7,6 +7,7 @@ const User=(state=user,action)=>{
             return user=username;
         case 'delete':
                     user=''
+                    break
         default:
             return user;
     }

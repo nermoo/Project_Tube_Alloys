@@ -5,9 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import axios from 'axios';
 import {useState,useEffect} from 'react';
-import NameList from './nameList';
 import {Grid} from '@material-ui/core';
 import Todo from './dolist';
 import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
@@ -63,37 +61,12 @@ const useStyles = makeStyles({
 export default function OutlinedCard(state) {
 
   const classes=useStyles();
-  // const handleToggle = (value) => () => {
-  //   const currentIndex = checked.indexOf(value);
-  //   const newChecked = [...checked];
+  const updater=useSelector(state=>state.Add);
 
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
 
-  //   setChecked(newChecked);
-  // };
+  useState(()=>{
 
-    
-try {
- 
- //username should be send to the database to get the particular items. 
-     axios.post('http://localhost:8080/items',{
-    
-      user:'koli',
-      flag:"todo" 
-    })
-    .then((response) => {
-      
-  }
-  
-  )
-} catch (error) {
-  console.log(error);
-
-}
+  },[updater])
 
 
 if(state.authorized===false){

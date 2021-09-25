@@ -40,7 +40,7 @@ const Todo=()=>{
         axios.post('http://localhost:8080/deleteItem',{
           user:user,
           item:item
-        }).then((res)=>{
+        }).then(()=>{
          dispatch(addItem(user));
         })
       } catch (error) {

@@ -90,7 +90,7 @@ const Todo=()=>{
 
  if(list.length===0){
    return(
-     <div>Loading...</div>
+     <div>Nothing to do..</div>
    )
  }
 
