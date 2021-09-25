@@ -78,7 +78,7 @@ const Add=()=>{
 
 
 
-    const addItems=()=>{
+    const addItems=(e)=>{
       
       if(todo===''){
         setMsg('Please enter an item');
@@ -89,8 +89,9 @@ const Add=()=>{
           Todo:todo,
           Flag:'todo'
         }).then(res=>{
+          
           dispatch(addItem(todo));
-          console.log(res.statusText);
+          setTodo('');
         })
         
 
@@ -101,7 +102,6 @@ const Add=()=>{
 
     return(
         <div className={classes.Cards}>
-      
         <Typography className={classes.msg}>{msg}</Typography>
         <TextField
         className={classes.txt}
@@ -110,7 +110,7 @@ const Add=()=>{
           name={todo}
           variant="outlined"
           required={true}
-          onBlur={e=>setTodo(e.target.value)}
+          onBlur={(e)=>setTodo(e.target.value)}
         />
         
           <Button className={classes.btn} onClick={addItems}>+</Button>
