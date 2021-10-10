@@ -11,13 +11,16 @@ const localStrategy=require('passport-local').Strategy;
 const session=require('express-session');
 const cors=require('cors');
 const cookieParser=require('cookie-parser');
+const path = require('path');
+
+const PORT=8080;
 
 try {
     mongoose.connect('mongodb+srv://nermo:nermo@userdata.knaz0.mongodb.net/UserData?retryWrites=true&w=majority',{ useUnifiedTopology: true });
     const db=mongoose.connection;
     db.on("error", console.error.bind(console, "connection error: "));
     db.once("open", function () {
-    console.log("Connected successfully");
+    console.log("successfully Connected to the mongo");
 });
 } catch (error) {
     console.log(error);
@@ -25,7 +28,7 @@ try {
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
-  origin:"http://localhost:3000",
+  origin:"http://localhost:8080",
   credential:true
 }))
 app.use(session({
@@ -203,6 +206,14 @@ app.post('/items', async (req, res) => {
   })
 
 
-app.listen(8080,()=>{
-    console.log("server is active");
+
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+    app.get("*", (req, res) => {
+       res.sendFile(path.resolve(__dirname + '/build/index.html'));
+    });
+ }
+
+app.listen(PORT,()=>{
+    console.log(`server is active on ${PORT}` );
 })
