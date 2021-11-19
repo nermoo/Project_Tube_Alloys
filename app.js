@@ -13,7 +13,7 @@ const cors=require('cors');
 const cookieParser=require('cookie-parser');
 const path = require('path');
 
-const PORT=8080;
+const PORT=process.env.PORT || 5000;;
 
 try {
     mongoose.connect('mongodb+srv://nermo:nermo@userdata.knaz0.mongodb.net/UserData?retryWrites=true&w=majority',{ useUnifiedTopology: true });
@@ -28,7 +28,7 @@ try {
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
-  origin:"http://localhost:8080",
+  origin:"http://localhost:5000",
   credential:true
 }))
 app.use(session({
@@ -205,15 +205,23 @@ app.post('/items', async (req, res) => {
     }
   })
 
+  app.use(express.static(path.join(__dirname, './client/build')));
+
+//   app.use(express.static(__dirname + '/public/'));
+//   if (process.env.NODE_ENV == 'production') {
+//     app.use(express.static('client/build'));
+//     // app.use(express.static(path.join(__dirname, 'client', 'build')));
+//     // app.use('*', express.static(path.join(__dirname, "client", "build")));
+    
+//  }
+
+ app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+});
 
 
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-    app.get("*", (req, res) => {
-       res.sendFile(path.resolve(__dirname + '/build/index.html'));
-    });
- }
 
 app.listen(PORT,()=>{
     console.log(`server is active on ${PORT}` );
 })
+
