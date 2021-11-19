@@ -84,7 +84,7 @@ const Add=()=>{
         setMsg('Please enter an item');
       }else{
         setMsg('');
-        axios.post('http://localhost:8080/add',{
+        axios.post('http://localhost:5000/add',{
           User:user,
           Todo:todo,
           Flag:'todo'

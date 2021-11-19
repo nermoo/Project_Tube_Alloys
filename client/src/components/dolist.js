@@ -38,7 +38,7 @@ const Todo=()=>{
    const updateList=(item)=>{
      let user=localStorage.getItem('user');
      try {
-       axios.post('http://localhost:8080/updateDone',{
+       axios.post('http://localhost:5000/updateDone',{
          user:user,
         flag:'done',
         item:item
@@ -54,7 +54,7 @@ const Todo=()=>{
    const deleteItem=(item)=>{
     let user=localStorage.getItem('user');
     try {
-      axios.post('http://localhost:8080/deleteItem',{
+      axios.post('http://localhost:5000/deleteItem',{
         user:user,
         item:item
       }).then((res)=>{
@@ -70,7 +70,7 @@ const Todo=()=>{
      let newAr=[];
      try {
        
-       axios.post('http://localhost:8080/items',{
+       axios.post('http://localhost:5000/items',{
        
          user:user,
          flag:"todo" 
