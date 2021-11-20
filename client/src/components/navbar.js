@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import BorderColorIcon from '@material-ui/icons/BorderColor';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -41,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
   },
   user:{
     color:'black'
+  },
+  logo:{
+    marginLeft:'5px'
   }
 }));
 
@@ -82,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
           <Typography className={classes.title} variant="h6" noWrap>
             <Button onClick={home}>
             To Do
+            <BorderColorIcon className={classes.logo}/>
             </Button>
           </Typography>
           </Link>
