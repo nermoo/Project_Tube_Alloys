@@ -37,7 +37,7 @@ const Todo=()=>{
     const deleteItem=(item)=>{
       let user=localStorage.getItem('user');
       try {
-        axios.post('http://localhost:5000/deleteItem',{
+        axios.post('/deleteItem',{
           user:user,
           item:item
         }).then(()=>{
@@ -54,7 +54,7 @@ const Todo=()=>{
     let newAr=[];
     try {
       
-      axios.post('http://localhost:5000/doneItems',{
+      axios.post('/doneItems',{
       
         user:user,
         flag:"done" 

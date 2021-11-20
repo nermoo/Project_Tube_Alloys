@@ -83,7 +83,7 @@ const Login=(state)=>{
       if(username==='' || password===''){
         setMsg('Please enter both Username and password');
       }else{
-        axios.post('http://localhost:5000/login',{
+        axios.post('/login',{
                   Name:username,
                   Password:password
                 }).then(res=>{

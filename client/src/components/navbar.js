@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import {Button} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import {addItem} from './../actions';
+import { user } from './../actions/index';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
   },
   nav:{
     backgroundColor:'#009688',
+  },
+  user:{
+    color:'black'
   }
 }));
 
@@ -86,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
             <Link to='/login'>
               
             <IconButton
+              className={classes.user}
               edge="end"
               aria-label="account of current user"
             //   aria-controls={menuId}
