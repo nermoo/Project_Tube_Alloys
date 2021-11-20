@@ -13,7 +13,12 @@ const cors=require('cors');
 const cookieParser=require('cookie-parser');
 const path = require('path');
 
-const PORT=process.env.PORT || 5000;;
+const PORT=5000;;
+app.use(function(req, res, next) {
+  // res.header("Access-Control-Allow-Origin", "http://localhost:5000"); 
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 try {
     mongoose.connect('mongodb+srv://nermo:nermo@userdata.knaz0.mongodb.net/UserData?retryWrites=true&w=majority',{ useUnifiedTopology: true });
@@ -25,12 +30,14 @@ try {
 } catch (error) {
     console.log(error);
 }
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-app.use(cors({
-  origin:"http://localhost:5000",
-  credential:true
-}))
+// app.use(cors({
+//   origin:"http://localhost:5000",
+//   credential:true
+// }))
 app.use(session({
   secret:"nermo",
   resave:false,
