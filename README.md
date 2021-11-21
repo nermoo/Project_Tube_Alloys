@@ -4,8 +4,8 @@
 
 ![GitHub language count](https://img.shields.io/github/languages/count/nermoo/Project_tube_alloys) ![GitHub top language](https://img.shields.io/github/languages/top/nermoo/project_tube_alloys?color=g) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/nermoo/project_tube_alloys/main) ![GitHub watchers](https://img.shields.io/github/watchers/nermoo/project_tube_alloys?style=social) ![GitHub followers](https://img.shields.io/github/followers/nermoo?style=social)
 
-
-<p align="center"><a href="https://nermotodoapp.herokuapp.com/"><img src="https://www.herokucdn.com/deploy/button.svg" width="250"></a></p>
+This is the application which i've deployed on heroku.
+<p align="center"><a href="https://nermotodoapp.herokuapp.com/"><img src="https://camo.githubusercontent.com/065f065d12a6ba6b2cfcff767aaafd438a7ed5ae615e3ac39051c022cebaa698/68747470733a2f2f63646e2e776f726c64766563746f726c6f676f2e636f6d2f6c6f676f732f6865726f6b752d312e737667" width="150"></a></p>
 
 #### Intro
 
