@@ -1,8 +1,15 @@
-# Project_Tube_Alloys
+#[Project_Tube_Alloys](https://nermotodoapp.herokuapp.com/)
 
-"Originally, Tube Alloys was the research and development programme authorised by the United Kingdom, with participation from Canada, to develop nuclear weapons during the Second World War."
+![GitHub language count](https://img.shields.io/github/languages/count/nermoo/Project_tube_alloys) ![GitHub top language](https://img.shields.io/github/languages/top/nermoo/project_tube_alloys?color=g) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/nermoo/project_tube_alloys/main) ![Heroku](https://img.shields.io/badge/%E2%86%91_Deploy_to-Heroku-7056bf.svg?style=flat) ![GitHub followers](https://img.shields.io/github/followers/nermoo?style=social)
 
-#####This is the user interface of the application
+
+>_"Originally, Tube Alloys was the research and development programme authorised by the United Kingdom, with participation from Canada, to develop nuclear weapons during the Second World War."_
+
+####Intro
+
+Project tube alloys is productivity application built with the MERN stack.
+
+#### This is the user interface of the application
 ![User interface](https://github.com/nermoo/Project_Tube_Alloys/blob/main/client/src/images/Screenshot%20(86).png?raw=true)
 
 #### Build with
@@ -12,3 +19,25 @@
 * [Redux](redux.js.org/)
 * [MongoDB](https://www.mongodb.com)
 * [Material-UI](https://mui.com/)
+
+#### Deployed on
+
+* [Heroku](heroku.com)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://nermotodoapp.herokuapp.com/)
+
+#### Installation
+
+Fork the repo first and run this command
+```$ git clone "git url"```
+
+After succesfully clone the repo run
+```$ npm install ```
+
+from both server and client folders to install all the dependancies. Finally
+
+```$ npm start```
+
+And you're good to go.
+
+
+
