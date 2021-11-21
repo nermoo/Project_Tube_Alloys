@@ -1,11 +1,13 @@
 #[Project_Tube_Alloys](https://nermotodoapp.herokuapp.com/)
 
-![GitHub language count](https://img.shields.io/github/languages/count/nermoo/Project_tube_alloys) ![GitHub top language](https://img.shields.io/github/languages/top/nermoo/project_tube_alloys?color=g) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/nermoo/project_tube_alloys/main) ![Heroku](https://img.shields.io/badge/%E2%86%91_Deploy_to-Heroku-7056bf.svg?style=flat) ![GitHub followers](https://img.shields.io/github/followers/nermoo?style=social)
+![GitHub language count](https://img.shields.io/github/languages/count/nermoo/Project_tube_alloys) ![GitHub top language](https://img.shields.io/github/languages/top/nermoo/project_tube_alloys?color=g) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/nermoo/project_tube_alloys/main) ![GitHub watchers](https://img.shields.io/github/watchers/nermoo/project_tube_alloys?style=social) ![GitHub followers](https://img.shields.io/github/followers/nermoo?style=social)
+
+<p align="center"><a><img src="https://www.herokucdn.com/deploy/button.svg" width="200"></a></p>
 
 
 >_"Originally, Tube Alloys was the research and development programme authorised by the United Kingdom, with participation from Canada, to develop nuclear weapons during the Second World War."_
 
-####Intro
+#### Intro
 
 Project tube alloys is productivity application built with the MERN stack.
 
@@ -23,7 +25,7 @@ Project tube alloys is productivity application built with the MERN stack.
 #### Deployed on
 
 * [Heroku](heroku.com)
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://nermotodoapp.herokuapp.com/)
+
 
 #### Installation
 
